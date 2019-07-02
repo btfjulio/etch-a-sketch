@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Etch-a-Sketch</title>
+</head>
+<body>
+
+    <div class="main">
+        <h1>ETCH-A-SKETCH</h1>
+        <h2>Select the grid size</h4>
+        <div class="choice">
+            <p>Lines:</p>
+            <input value=20 id="lines" type="number" step="1">
+            <p>Columns:</p>
+            <input value=30 id="columns" type="number" step="1">
+            <input id="generate" type="button" value="Generate">
+            <div class='radio'>
+                <input type="radio" id="black" name="pencil" value="black"
+                        checked>
+                <label for="black">Black</label>    
+            </div>                
+            <div class='radio'>
+                <input type="radio" id="rainbow" name="pencil" value="rainbow">
+                <label for="black">Rainbow</label>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+        
+        const createGrid = (lines,columns) => {
+            let rows = document.querySelectorAll('.lines');
+            rows.forEach((row) => body.removeChild(row));           
+            createLines(lines);
+            createColumns(columns);
+            hoverEfect();
+        }
+
+        const createLines = (lines) =>{
+            for(let i = 0; i < lines; i++){
+                let newLine = document.createElement('div');
+                newLine.classList.add('lines');
+                body.appendChild(newLine);
+            };
+        };
+
+
+        const createColumns = (columns) => {
+            console.log('oi');
+            let rows = document.querySelectorAll('.lines');
+            rows.forEach((row) => {
+                for(let i = 0; i < columns; i++){
+                    let newColumn = document.createElement('div');
+                    newColumn.classList.add('columns');
+                    row.appendChild(newColumn);
+                };
+            });
+        };
+
+        const hoverEfect = () => {
+            let boxes = document.querySelectorAll('.columns');
+            let rainbow = document.querySelector('#rainbow');
+            boxes.forEach((box) => {
+                box.addEventListener('mouseover', () => {
+                    if(rainbow.checked) {
+                        let newColor = getRandomColor()
+                        return box.style.backgroundColor = newColor;
+                    } else {
+                        console.log(rainbow.checked);
+                        return box.style.backgroundColor = "black";
+                    }       
+                });
+            });
+        }
+
+        function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+        }
+
+        let lines = document.getElementById("lines");
+        let columns = document.getElementById("columns");
+        let startButton = document.querySelector('#generate');
+        let body = document.querySelector('.container');
+
+        createGrid(lines.value, columns.value);
+        startButton.addEventListener('click', () => {
+            createGrid(lines.value, columns.value);
+        });
+
+    </script>
+</body>
+</html>
