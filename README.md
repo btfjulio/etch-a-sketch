@@ -4,4 +4,5 @@ Working DOM manipulation using Javascript with event listeners and query selecto
 
 The CSS responsive layout done using flex-box.
 
-The user can choose betwenn black and random colors for the hover effect.
+The user can choose between black and random colors for the hover effect.
+Aswell as the number of lines and columns to create the Sketch Grid.
